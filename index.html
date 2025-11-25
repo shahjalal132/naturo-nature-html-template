@@ -179,8 +179,8 @@
 
     <!-- Header -->
     <header>
-        <!-- Top Bar -->
-        <div class="bg-primary-dark text-white py-2">
+        <!-- Top Bar - Hidden on tablet and mobile -->
+        <div class="bg-primary-dark text-white py-2 hidden lg:block">
             <div class="max-w-[1512px] mx-auto px-4 flex justify-between items-center text-sm py-1">
                 <div class="flex items-center gap-2 ml-8">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,19 +208,19 @@
 
         <!-- Main Header -->
         <div class="bg-primary-green">
-            <div class="max-w-[1512px] mx-auto px-2 py-3 flex justify-between items-center">
+            <div class="max-w-[1512px] mx-auto px-4 md:px-6 lg:px-2 py-3 flex justify-between items-center gap-4">
                 <!-- Logo -->
-                <div>
+                <div class="flex-shrink-0">
                     <a href="#">
-                        <img src="./public/images/Naturo-Logo.png" alt="Logo">
+                        <img src="./public/images/Naturo-Logo.png" alt="Logo" class="h-8 md:h-10 lg:h-auto">
                     </a>
                 </div>
 
-                <!-- Search Bar -->
-                <div class="flex-1 max-w-5xl mx-8">
-                    <div class="relative">
+                <!-- Search Bar - Hidden on mobile, adjusted on tablet -->
+                <div class="hidden md:flex flex-1 max-w-5xl lg:mx-8 md:mx-4">
+                    <div class="relative w-full">
                         <input type="text" placeholder="Search in Naturo..."
-                            class="w-full bg-primary-dark text-white font-semibold text-sm placeholder-primary-semi-dark px-10 py-3 pr-12 focus:outline-none">
+                            class="w-full bg-primary-dark text-white font-semibold text-sm placeholder-primary-semi-dark px-10 py-2 md:py-3 lg:py-3 pr-12 focus:outline-none">
                         <button class="absolute left-3 top-1/2 -translate-y-1/2">
                             <svg class="w-5 h-5 text-primary-semi-dark" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -232,12 +232,16 @@
                 </div>
 
                 <!-- Cart -->
-                <div class="flex items-center gap-6">
-                    <button class="relative text-white">
-                        <i class="fas fa-shopping-cart text-medium"></i>
+                <div class="flex items-center gap-7 md:gap-6 flex-shrink-0">
+                    <button class="relative text-white flex items-center gap-1 md:gap-2">
+                        <i class="fas fa-shopping-cart text-lg md:text-xl"></i>
                         <span
-                            class="absolute -top-3 left-3 bg-[#DC3545] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                        <span class="text-sm">Cart</span>
+                            class="absolute -top-2 md:-top-3 left-3 md:left-4 bg-[#DC3545] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        <span class="hidden md:inline text-sm">Cart</span>
+                    </button>
+                    <!-- Mobile Search Icon - Visible only on mobile -->
+                    <button class="md:hidden text-white text-xl" id="mobile-search-button-open">
+                        <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
