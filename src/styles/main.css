@@ -54,6 +54,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Slick Slider Gap for Product Cards */
+.product-slider .slick-slide {
+  margin: 0 8px;
+}
+
+.product-slider .slick-list {
+  margin: 0 -8px;
+}
+
 /* Container */
 .container-ds {
   max-width: 1240px;
