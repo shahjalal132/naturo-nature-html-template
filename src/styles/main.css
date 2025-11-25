@@ -2,23 +2,23 @@
 
 @theme {
   /* Colors - Design System */
-  --color-primary-green: #2D5F3F;
-  --color-primary-light: #4CAF50;
-  --color-primary-light-green: #4CAF50;
-  --color-primary-neon: #39FF14;
-  --color-primary-neon-green: #39FF14;
+  --color-primary-green: #003315;
+  --color-primary-light: #4caf50;
+  --color-primary-light-green: #4caf50;
+  --color-primary-neon: #39ff14;
+  --color-primary-neon-green: #39ff14;
   --color-primary-semi-dark: #25b672;
-  --color-primary-dark: #000F06;
-  --color-primary-dark-green: #1B3A2C;
+  --color-primary-dark: #000f06;
+  --color-primary-dark-green: #1b3a2c;
 
-  --color-secondary-gold: #D4AF37;
-  --color-secondary-amber: #FFA500;
-  --color-secondary-brown: #8B4513;
+  --color-secondary-gold: #d4af37;
+  --color-secondary-amber: #ffa500;
+  --color-secondary-brown: #8b4513;
 
-  --color-neutral-white: #FFFFFF;
-  --color-neutral-off-white: #F8F9FA;
-  --color-neutral-light-gray: #E9ECEF;
-  --color-neutral-gray: #6C757D;
+  --color-neutral-white: #ffffff;
+  --color-neutral-off-white: #f8f9fa;
+  --color-neutral-light-gray: #e9ecef;
+  --color-neutral-gray: #6c757d;
   --color-neutral-dark-gray: #495057;
   --color-neutral-black: #000000;
 
