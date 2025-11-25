@@ -13,64 +13,12 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap"
         rel="stylesheet">
 
-    <!-- Tailwind CSS v4 -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-    <style type="text/tailwindcss">
-        @theme {
-            /* Colors */
-            --color-primary-green: #2D5F3F;
-            --color-primary-light: #4CAF50;
-            --color-primary-neon: #39FF14;
-            --color-primary-dark: #000F06;
-            
-            --color-secondary-gold: #D4AF37;
-            --color-secondary-amber: #FFA500;
-            --color-secondary-brown: #8B4513;
-            
-            --color-neutral-off-white: #F8F9FA;
-            --color-neutral-light-gray: #E9ECEF;
-            --color-neutral-gray: #6C757D;
-            --color-neutral-dark-gray: #495057;
-            
-            /* Typography */
-            --font-sans: 'Inter', sans-serif;
-            --font-secondary: 'Poppins', sans-serif;
-            --font-display: 'Playfair Display', serif;
-            
-            /* Spacing */
-            --spacing-container: 2rem;
-        }
-
-        /* Custom Utilities */
-        .container-custom {
-            max-width: 1240px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: var(--spacing-container);
-            padding-right: var(--spacing-container);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #1B3A2C 0%, #2D5F3F 100%);
-        }
-
-        .text-shadow-sm {
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
 </head>
 
 <body class="font-sans text-[#212529] bg-white antialiased">
@@ -92,14 +40,14 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
-                    <span>Discover the Power of Nature with NaturoBD</span>
+                    <span class="font-bold">Discover the Power of Nature with NaturoBD</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>Customer Help</span>
+                    <span class="font-bold">Customer Help</span>
                 </div>
             </div>
         </div>
@@ -539,48 +487,8 @@
         </div>
     </footer>
 
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // jQuery Logic
-        $(document).ready(function () {
-            // Mobile Menu Toggle
-            $('#mobile-menu-btn').click(function () {
-                $('#mobile-menu').slideToggle(300);
-            });
-
-            // Smooth Scroll for anchor links
-            $('a[href^="#"]').on('click', function (event) {
-                var target = $(this.getAttribute('href'));
-                if (target.length) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top - 100 // Adjust for sticky header
-                    }, 800);
-                }
-            });
-
-            // Simple "Add to Cart" Animation
-            $('.group button:has(.lucide-shopping-cart)').click(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                const btn = $(this);
-                const originalContent = btn.html();
-
-                // Change to checkmark
-                btn.html('<i data-lucide="check" class="w-5 h-5 text-primary-green"></i>');
-                lucide.createIcons();
-
-                // Revert after 1.5s
-                setTimeout(function () {
-                    btn.html(originalContent);
-                    lucide.createIcons();
-                }, 1500);
-            });
-        });
-    </script>
+    <!-- Vite entry point - this will load our CSS and JS -->
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
