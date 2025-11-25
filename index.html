@@ -4,485 +4,1022 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NATURO | Natural Products E-commerce</title>
+    <title>NATURO BD | Natural Products E-commerce</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600&display=swap"
         rel="stylesheet">
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Slick Carousel JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <style>
+
+        /* Container */
+        .container-ds {
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            background: var(--color-neutral-white);
+            border: 1px solid var(--color-neutral-light-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            aspect-ratio: 3/4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+            border-color: var(--color-primary-light-green);
+        }
+
+        .product-image-container {
+            aspect-ratio: 1/1;
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--color-neutral-off-white);
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .badge-new {
+            background: var(--color-primary-light-green);
+            color: var(--color-neutral-white);
+        }
+
+        .badge-sale {
+            background: #DC3545;
+            color: var(--color-neutral-white);
+        }
+
+        .badge-hot {
+            background: var(--color-secondary-amber);
+            color: var(--color-neutral-white);
+        }
+
+        /* Sticky Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hero Gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1B3A2C 0%, #2D5F3F 100%);
+        }
+
+        /* Category Icons Bar */
+        .category-bar {
+            background: var(--color-primary-light-green);
+            padding: 1.5rem 0;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Slick Carousel Dots */
+        .slick-dots {
+            bottom: -50px;
+        }
+
+        .slick-dots li button:before {
+            color: var(--color-primary-green);
+            font-size: 12px;
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: var(--color-primary-light-green);
+        }
+
+        /* Product Action Buttons */
+        .product-actions {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-neutral-white);
+            color: var(--color-primary-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn:hover {
+            background: var(--color-primary-green);
+            color: var(--color-neutral-white);
+        }
+
+        /* We Care Section */
+        .we-care-section {
+            background: var(--color-primary-light-green);
+            padding: 2rem 0;
+        }
+    </style>
 </head>
 
-<body class="font-sans text-[#212529] bg-white antialiased">
+<body class="font-primary text-[#212529] bg-white antialiased">
 
     <!-- Header -->
     <header>
         <!-- Top Bar -->
-        <div class="bg-primary-dark text-white py-2">
-            <div class="max-w-[1512px] mx-auto px-4 flex justify-between items-center text-sm py-1">
-                <div class="flex items-center gap-2 ml-8">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span>09639812525</span>
+        <div class="bg-primary-green text-white py-2">
+            <div class="container-ds flex justify-between items-center text-sm">
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-primary-light-green transition-colors">
+                        <i class="fas fa-shipping-fast mr-1"></i> Track Order
+                    </a>
+                    <a href="#" class="hover:text-primary-light-green transition-colors">
+                        <i class="fas fa-user mr-1"></i> Login / Register
+                    </a>
                 </div>
                 <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    <span class="font-medium text-[#d8f7e5]">Discover the Power of Nature with NaturoBD</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span class="font-medium text-[#d8f7e5]">Customer Help</span>
+                    <i class="fas fa-phone"></i>
+                    <span>+880 1711-111111</span>
                 </div>
             </div>
         </div>
 
         <!-- Main Header -->
-        <div class="bg-primary-green">
-            <div class="max-w-[1512px] mx-auto px-2 py-3 flex justify-between items-center">
-                <!-- Logo -->
-                <div>
-                   <a href="#">
-                    <img src="./public/images/Naturo-Logo.png" alt="Logo">
-                   </a>
-                </div>
+        <div class="bg-white border-b border-[#E9ECEF]">
+            <div class="container-ds py-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-3">
+                        <a href="#" class="flex items-center gap-3">
+                            <div class="text-3xl font-bold text-primary-green tracking-wider">NATURO BD</div>
+                            <div class="text-primary-light-green">
+                                <i class="fas fa-leaf text-2xl"></i>
+                            </div>
+                        </a>
+                    </div>
 
-                <!-- Search Bar -->
-                <div class="flex-1 max-w-6xl mx-8">
-                    <div class="relative">
-                        <input type="text" placeholder="Search in Naturo..."
-                            class="w-full bg-primary-dark text-white font-semibold text-sm placeholder-primary-semi-dark px-10 py-2 pr-12 focus:outline-none">
-                        <button class="absolute left-3 top-1/2 -translate-y-1/2">
-                            <svg class="w-5 h-5 text-primary-semi-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                    <!-- Navigation -->
+                    <nav class="hidden lg:flex items-center gap-8">
+                        <a href="#" class="text-[#212529] hover:text-primary-green font-medium transition-colors">Home</a>
+                        <a href="#" class="text-[#212529] hover:text-primary-green font-medium transition-colors">Shop</a>
+                        <a href="#" class="text-[#212529] hover:text-primary-green font-medium transition-colors">About Us</a>
+                        <a href="#" class="text-[#212529] hover:text-primary-green font-medium transition-colors">Contact Us</a>
+                    </nav>
+
+                    <!-- Search Bar -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-8">
+                        <div class="relative w-full">
+                            <input type="text" placeholder="Search products..."
+                                class="w-full bg-[#F8F9FA] border border-[#DEE2E6] rounded-full px-6 py-2 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-light-green focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-neutral-gray"></i>
+                        </div>
+                    </div>
+
+                    <!-- Utility Icons -->
+                    <div class="flex items-center gap-6">
+                        <button class="relative text-[#212529] hover:text-primary-green transition-colors">
+                            <i class="fas fa-heart text-xl"></i>
+                        </button>
+                        <button class="relative text-[#212529] hover:text-primary-green transition-colors">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span
+                                class="absolute -top-2 -right-2 bg-[#DC3545] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </button>
+                        <button class="text-[#212529] hover:text-primary-green transition-colors">
+                            <i class="fas fa-user text-xl"></i>
                         </button>
                     </div>
-                </div>
-
-                <!-- Cart -->
-                <div class="relative">
-                    <button class="flex items-center gap-2 text-white hover:text-[#7ED957] transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span class="font-medium">Cart</span>
-                        <span
-                            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </button>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-gradient relative overflow-hidden min-h-[500px] flex items-center">
+    <section class="hero-gradient relative overflow-hidden min-h-[400px] flex items-center justify-center py-16">
         <!-- Decorative Elements -->
         <div class="absolute inset-0 opacity-20 pointer-events-none">
-            <i data-lucide="leaf" class="absolute top-10 left-10 w-24 h-24 text-white rotate-45"></i>
-            <i data-lucide="leaf" class="absolute bottom-20 right-20 w-32 h-32 text-white -rotate-12"></i>
-            <i data-lucide="leaf" class="absolute top-1/2 right-1/4 w-16 h-16 text-white rotate-90 blur-sm"></i>
+            <i class="fas fa-leaf absolute top-10 left-10 text-white text-6xl rotate-45"></i>
+            <i class="fas fa-leaf absolute bottom-20 right-20 text-white text-8xl -rotate-12"></i>
         </div>
 
-        <div class="container-custom relative z-10 grid md:grid-cols-2 gap-12 items-center py-16">
-            <div class="text-white space-y-6 animate-fade-in-up">
-                <span
-                    class="inline-block px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium border border-white/20 text-primary-neon">100%
-                    Natural & Organic</span>
-                <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">Nature's Best <br />
-                    <span class="text-primary-light">For You</span>
-                </h1>
-                <p class="text-lg text-white/90 max-w-lg leading-relaxed">Discover our premium collection of organic
-                    supplements, skincare, and wellness products sourced directly from nature.</p>
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <button
-                        class="bg-primary-light text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-primary-green transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">Shop
-                        Now</button>
-                    <button
-                        class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-primary-green transition-all">Learn
-                        More</button>
-                </div>
-            </div>
-            <div class="hidden md:flex justify-center relative">
-                <div
-                    class="w-80 h-96 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6 transform rotate-3 hover:rotate-0 transition-all duration-500 shadow-2xl">
-                    <div
-                        class="w-full h-full bg-neutral-off-white rounded-lg flex items-center justify-center relative overflow-hidden group">
-                        <i data-lucide="package"
-                            class="w-32 h-32 text-neutral-light-gray group-hover:scale-110 transition-transform duration-500"></i>
-                        <div
-                            class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded shadow-sm">
-                            <p class="font-bold text-primary-dark">Premium Starter Kit</p>
-                            <p class="text-sm text-primary-green">$49.99</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Lamp Decorative Element -->
+        <div class="absolute top-0 left-1/4 opacity-30">
+            <div class="w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
+        </div>
+
+        <!-- Vine Decorative Element -->
+        <div class="absolute top-1/2 right-1/4 opacity-30">
+            <i class="fas fa-seedling text-white text-9xl transform rotate-12"></i>
+        </div>
+
+        <div class="container-ds relative z-10 text-center">
+            <h1 class="text-6xl md:text-8xl font-bold text-white mb-4 tracking-wider">NATURO BD</h1>
+            <p class="text-xl text-white/90 max-w-2xl mx-auto">Your trusted source for natural and organic products</p>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="py-16 bg-white">
-        <div class="container-custom">
-            <div class="flex justify-between items-end mb-10">
-                <div>
-                    <h2 class="font-display text-3xl font-bold text-[#212529] mb-2">SHOP BY CATEGORY</h2>
-                    <div class="h-1 w-20 bg-primary-green rounded-full"></div>
-                </div>
-                <a href="#"
-                    class="text-primary-green font-semibold hover:text-primary-light flex items-center gap-1 group">
-                    View All <i data-lucide="arrow-right"
-                        class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <!-- Category Item -->
-                <a href="#"
-                    class="group flex flex-col items-center gap-4 p-6 rounded-xl bg-neutral-off-white hover:bg-primary-green/5 hover:shadow-md transition-all border border-transparent hover:border-primary-green/20">
-                    <div
-                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="leaf" class="w-8 h-8 text-primary-green"></i>
+    <!-- Category Bar -->
+    <section class="category-bar">
+        <div class="container-ds">
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-leaf text-xl"></i>
                     </div>
-                    <span class="font-medium text-neutral-dark-gray group-hover:text-primary-green">Organic</span>
+                    <span class="text-sm font-medium">Organic</span>
                 </a>
-
-                <a href="#"
-                    class="group flex flex-col items-center gap-4 p-6 rounded-xl bg-neutral-off-white hover:bg-primary-green/5 hover:shadow-md transition-all border border-transparent hover:border-primary-green/20">
-                    <div
-                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="droplets" class="w-8 h-8 text-secondary-amber"></i>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-apple-alt text-xl"></i>
                     </div>
-                    <span class="font-medium text-neutral-dark-gray group-hover:text-primary-green">Oils</span>
+                    <span class="text-sm font-medium">Healthy Food</span>
                 </a>
-
-                <a href="#"
-                    class="group flex flex-col items-center gap-4 p-6 rounded-xl bg-neutral-off-white hover:bg-primary-green/5 hover:shadow-md transition-all border border-transparent hover:border-primary-green/20">
-                    <div
-                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="pill" class="w-8 h-8 text-primary-dark"></i>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-spa text-xl"></i>
                     </div>
-                    <span class="font-medium text-neutral-dark-gray group-hover:text-primary-green">Vitamins</span>
+                    <span class="text-sm font-medium">Wellness</span>
                 </a>
-
-                <a href="#"
-                    class="group flex flex-col items-center gap-4 p-6 rounded-xl bg-neutral-off-white hover:bg-primary-green/5 hover:shadow-md transition-all border border-transparent hover:border-primary-green/20">
-                    <div
-                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="sparkles" class="w-8 h-8 text-secondary-gold"></i>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-th-large text-xl"></i>
                     </div>
-                    <span class="font-medium text-neutral-dark-gray group-hover:text-primary-green">Beauty</span>
+                    <span class="text-sm font-medium">All</span>
                 </a>
-
-                <a href="#"
-                    class="group flex flex-col items-center gap-4 p-6 rounded-xl bg-neutral-off-white hover:bg-primary-green/5 hover:shadow-md transition-all border border-transparent hover:border-primary-green/20">
-                    <div
-                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="coffee" class="w-8 h-8 text-secondary-brown"></i>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-palette text-xl"></i>
                     </div>
-                    <span class="font-medium text-neutral-dark-gray group-hover:text-primary-green">Teas</span>
+                    <span class="text-sm font-medium">Cosmetics</span>
                 </a>
-
-                <a href="#"
-                    class="group flex flex-col items-center gap-4 p-6 rounded-xl bg-neutral-off-white hover:bg-primary-green/5 hover:shadow-md transition-all border border-transparent hover:border-primary-green/20">
-                    <div
-                        class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                        <i data-lucide="gift" class="w-8 h-8 text-primary-light"></i>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-credit-card text-xl"></i>
                     </div>
-                    <span class="font-medium text-neutral-dark-gray group-hover:text-primary-green">Gifts</span>
+                    <span class="text-sm font-medium">Card</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-gift text-xl"></i>
+                    </div>
+                    <span class="text-sm font-medium">Gifts</span>
+                </a>
+                <a href="#" class="flex flex-col items-center gap-2 text-white hover:scale-110 transition-transform group">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                        <i class="fas fa-leaf text-xl"></i>
+                    </div>
+                    <span class="text-sm font-medium">Herbs</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Featured Products -->
-    <section class="py-16 bg-neutral-off-white">
-        <div class="container-custom">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-primary-green font-semibold tracking-wider uppercase text-sm">Our Selection</span>
-                <h2 class="font-display text-4xl font-bold text-[#212529] mt-2 mb-4">Featured Products</h2>
-                <p class="text-neutral-gray">Handpicked favorites from our collection, loved by our community for their
-                    purity and effectiveness.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <!-- Our Best Sellers Section -->
+    <section class="py-12 bg-white">
+        <div class="container-ds">
+            <h2 class="text-3xl font-bold text-[#212529] mb-8 uppercase tracking-wider">OUR BEST SELLERS</h2>
+            <div class="bestsellers-slider product-slider">
                 <!-- Product Card 1 -->
-                <div
-                    class="bg-white rounded-lg p-4 border border-neutral-light-gray hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-primary-light transition-all duration-300 group">
-                    <div
-                        class="relative aspect-square bg-neutral-off-white rounded mb-3 overflow-hidden flex items-center justify-center">
-                        <span
-                            class="absolute top-2 right-2 bg-primary-light text-white text-xs font-bold px-2 py-1 rounded z-10">NEW</span>
-                        <i data-lucide="package"
-                            class="w-16 h-16 text-neutral-light-gray group-hover:scale-110 transition-transform duration-500"></i>
-                        <!-- Quick Action Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="shopping-cart" class="w-5 h-5"></i></button>
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="eye" class="w-5 h-5"></i></button>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn" title="Compare">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            <button class="action-btn" title="Quick View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="product-badge badge-new">NEW</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-cube text-5xl text-neutral-light-gray"></i>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-1 text-secondary-gold text-xs">
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <span class="text-neutral-gray ml-1">(24)</span>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Organic Honey Jar 500g</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(24)</span>
+                            </div>
                         </div>
-                        <h3
-                            class="font-medium text-neutral-dark-gray leading-tight hover:text-primary-green cursor-pointer">
-                            Organic Green Tea Extract</h3>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-lg font-bold text-primary-green">$24.99</span>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 1,200</span>
+                            <button class="action-btn" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product Card 2 -->
-                <div
-                    class="bg-white rounded-lg p-4 border border-neutral-light-gray hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-primary-light transition-all duration-300 group">
-                    <div
-                        class="relative aspect-square bg-neutral-off-white rounded mb-3 overflow-hidden flex items-center justify-center">
-                        <span
-                            class="absolute top-2 right-2 bg-secondary-amber text-white text-xs font-bold px-2 py-1 rounded z-10">HOT</span>
-                        <i data-lucide="droplets"
-                            class="w-16 h-16 text-neutral-light-gray group-hover:scale-110 transition-transform duration-500"></i>
-                        <div
-                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="shopping-cart" class="w-5 h-5"></i></button>
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="eye" class="w-5 h-5"></i></button>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn" title="Compare">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            <button class="action-btn" title="Quick View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="product-badge badge-hot">HOT</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-capsules text-5xl text-neutral-light-gray"></i>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-1 text-secondary-gold text-xs">
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star-half" class="w-3 h-3 fill-current"></i>
-                            <span class="text-neutral-gray ml-1">(18)</span>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Vitamin D3 Supplement</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(18)</span>
+                            </div>
                         </div>
-                        <h3
-                            class="font-medium text-neutral-dark-gray leading-tight hover:text-primary-green cursor-pointer">
-                            Lavender Essential Oil</h3>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-lg font-bold text-primary-green">$18.50</span>
-                            <span class="text-sm text-neutral-gray line-through">$22.00</span>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 850</span>
+                            <button class="action-btn" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product Card 3 -->
-                <div
-                    class="bg-white rounded-lg p-4 border border-neutral-light-gray hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-primary-light transition-all duration-300 group">
-                    <div
-                        class="relative aspect-square bg-neutral-off-white rounded mb-3 overflow-hidden flex items-center justify-center">
-                        <i data-lucide="pill"
-                            class="w-16 h-16 text-neutral-light-gray group-hover:scale-110 transition-transform duration-500"></i>
-                        <div
-                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="shopping-cart" class="w-5 h-5"></i></button>
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="eye" class="w-5 h-5"></i></button>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn" title="Compare">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            <button class="action-btn" title="Quick View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-wine-bottle text-5xl text-neutral-light-gray"></i>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-1 text-secondary-gold text-xs">
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <span class="text-neutral-gray ml-1">(42)</span>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Essential Oil Set - 4 Pieces</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(42)</span>
+                            </div>
                         </div>
-                        <h3
-                            class="font-medium text-neutral-dark-gray leading-tight hover:text-primary-green cursor-pointer">
-                            Multivitamin Complex</h3>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-lg font-bold text-primary-green">$32.00</span>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 1,500</span>
+                            <button class="action-btn" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product Card 4 -->
-                <div
-                    class="bg-white rounded-lg p-4 border border-neutral-light-gray hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-primary-light transition-all duration-300 group">
-                    <div
-                        class="relative aspect-square bg-neutral-off-white rounded mb-3 overflow-hidden flex items-center justify-center">
-                        <span
-                            class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded z-10">-20%</span>
-                        <i data-lucide="flower-2"
-                            class="w-16 h-16 text-neutral-light-gray group-hover:scale-110 transition-transform duration-500"></i>
-                        <div
-                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="shopping-cart" class="w-5 h-5"></i></button>
-                            <button
-                                class="bg-white p-2 rounded-full hover:bg-primary-green hover:text-white transition-colors"><i
-                                    data-lucide="eye" class="w-5 h-5"></i></button>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="action-btn" title="Compare">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            <button class="action-btn" title="Quick View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="product-badge badge-sale">-20%</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-pump-medical text-5xl text-neutral-light-gray"></i>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-1 text-secondary-gold text-xs">
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
-                            <i data-lucide="star" class="w-3 h-3 text-neutral-light-gray"></i>
-                            <span class="text-neutral-gray ml-1">(12)</span>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Aloe Vera Gel 250ml</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(12)</span>
+                            </div>
                         </div>
-                        <h3
-                            class="font-medium text-neutral-dark-gray leading-tight hover:text-primary-green cursor-pointer">
-                            Natural Face Cream</h3>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-lg font-bold text-primary-green">$28.00</span>
-                            <span class="text-sm text-neutral-gray line-through">$35.00</span>
+                        <div class="flex items-center justify-between mt-auto">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-primary-green">৳ 480</span>
+                                <span class="text-sm text-neutral-gray line-through">৳ 600</span>
+                            </div>
+                            <button class="action-btn" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-12 text-center">
-                <button
-                    class="inline-flex items-center gap-2 bg-transparent border-2 border-primary-green text-primary-green px-8 py-3 rounded-md font-semibold hover:bg-primary-green hover:text-white transition-all">
-                    View All Products
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
+                <!-- Add more product cards as needed -->
             </div>
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-16 bg-primary-green text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <i data-lucide="leaf" class="absolute top-0 left-0 w-64 h-64 -translate-x-1/2 -translate-y-1/2"></i>
-            <i data-lucide="leaf"
-                class="absolute bottom-0 right-0 w-64 h-64 translate-x-1/2 translate-y-1/2 rotate-180"></i>
+    <!-- Honey Section -->
+    <section class="py-12 bg-neutral-off-white">
+        <div class="container-ds">
+            <h2 class="text-3xl font-bold text-[#212529] mb-8 uppercase tracking-wider">Honey</h2>
+            <div class="honey-slider product-slider">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-jar text-5xl text-secondary-brown"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Wild Forest Honey 500g</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(35)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 1,300</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <span class="product-badge badge-new">NEW</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-jar text-5xl text-secondary-brown"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Organic Acacia Honey 1kg</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(28)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 2,400</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-jar text-5xl text-secondary-brown"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Raw Wild Honey 250g</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(42)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 750</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <span class="product-badge badge-sale">-15%</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-jar text-5xl text-secondary-brown"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Manuka Honey 350g</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(19)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-primary-green">৳ 1,700</span>
+                                <span class="text-sm text-neutral-gray line-through">৳ 2,000</span>
+                            </div>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-jar text-5xl text-secondary-brown"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Flower Honey Combo Pack</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(31)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 1,800</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="container-custom relative z-10 text-center max-w-3xl mx-auto">
-            <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Join Our Green Community</h2>
-            <p class="text-white/80 mb-8 text-lg">Subscribe to our newsletter for exclusive offers, wellness tips, and
-                new product arrivals.</p>
+    <!-- Wellness Section -->
+    <section class="py-12 bg-white">
+        <div class="container-ds">
+            <h2 class="text-3xl font-bold text-[#212529] mb-8 uppercase tracking-wider">Wellness</h2>
+            <div class="wellness-slider product-slider">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-burn text-5xl text-secondary-amber"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Natural Incense Sticks Pack</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(22)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 450</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <span class="product-badge badge-new">NEW</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-spa text-5xl text-primary-light-green"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Aromatherapy Essential Oil Set</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(38)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 1,200</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-gift text-5xl text-secondary-gold"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Wellness Gift Box Premium</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(15)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 2,500</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <span class="product-badge badge-hot">HOT</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-leaf text-5xl text-primary-green"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Herbal Tea Collection</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(27)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 950</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-capsules text-5xl text-primary-green"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Ayurvedic Wellness Pack</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(33)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 1,650</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input type="email" placeholder="Your email address"
-                    class="flex-1 px-6 py-3 rounded-full text-neutral-dark-gray focus:outline-none focus:ring-2 focus:ring-primary-light">
-                <button type="button"
-                    class="bg-secondary-amber text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-secondary-amber transition-colors shadow-lg">Subscribe</button>
-            </form>
+    <!-- All Products Section -->
+    <section class="py-12 bg-neutral-off-white">
+        <div class="container-ds">
+            <h2 class="text-3xl font-bold text-[#212529] mb-8 uppercase tracking-wider">All Products</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Product cards will be generated here - repeating 15 products for demo -->
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <span class="product-badge badge-new">NEW</span>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-cube text-5xl text-neutral-light-gray"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Organic Green Tea</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(45)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 550</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add 14 more similar product cards here - structure repeated -->
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-wine-bottle text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Lavender Oil</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(28)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 680</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><span class="product-badge badge-sale">-25%</span><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-capsules text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Multivitamin Complex</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(52)</span></div></div><div class="flex items-center justify-between mt-auto"><div class="flex items-center gap-2"><span class="text-lg font-bold text-primary-green">৳ 890</span><span class="text-sm text-neutral-gray line-through">৳ 1,200</span></div><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-pump-medical text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Aloe Vera Gel</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(19)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 420</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><span class="product-badge badge-hot">HOT</span><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-jar text-5xl text-secondary-brown"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Royal Honey</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(61)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 1,850</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-spa text-5xl text-primary-light-green"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Face Cream Organic</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(34)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 720</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-burn text-5xl text-secondary-amber"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Incense Sticks</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(41)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 380</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><span class="product-badge badge-new">NEW</span><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-leaf text-5xl text-primary-green"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Herbal Tea Mix</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(26)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 650</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-capsules text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Omega 3 Capsules</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(48)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 1,100</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><span class="product-badge badge-sale">-10%</span><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-wine-bottle text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Rose Essential Oil</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(37)</span></div></div><div class="flex items-center justify-between mt-auto"><div class="flex items-center gap-2"><span class="text-lg font-bold text-primary-green">৳ 540</span><span class="text-sm text-neutral-gray line-through">৳ 600</span></div><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-gift text-5xl text-secondary-gold"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Gift Set Premium</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(29)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 2,200</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-pump-medical text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Neem Face Wash</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(43)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 390</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><span class="product-badge badge-hot">HOT</span><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-cube text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Turmeric Powder</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(31)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 280</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-jar text-5xl text-secondary-brown"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Organic Honey 1kg</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(56)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 1,600</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-wine-bottle text-5xl text-neutral-light-gray"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Eucalyptus Oil</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-neutral-gray ml-1">(23)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 520</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+                <div class="product-card"><div class="product-image-container"><div class="product-actions"><button class="action-btn"><i class="fas fa-heart"></i></button><button class="action-btn"><i class="fas fa-exchange-alt"></i></button><button class="action-btn"><i class="fas fa-eye"></i></button></div><span class="product-badge badge-new">NEW</span><div class="w-full h-full bg-neutral-off-white flex items-center justify-center"><i class="fas fa-spa text-5xl text-primary-light-green"></i></div></div><div class="flex-1 flex flex-col justify-between"><div><h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Body Lotion Natural</h3><div class="flex items-center gap-1 text-secondary-gold text-xs mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-neutral-gray ml-1">(39)</span></div></div><div class="flex items-center justify-between mt-auto"><span class="text-lg font-bold text-primary-green">৳ 580</span><button class="action-btn"><i class="fas fa-shopping-cart"></i></button></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recently Viewed Section -->
+    <section class="py-12 bg-white">
+        <div class="container-ds">
+            <h2 class="text-3xl font-bold text-[#212529] mb-8 uppercase tracking-wider">Recently Viewed</h2>
+            <div class="recently-viewed-slider product-slider">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-actions">
+                            <button class="action-btn" title="Add to Wishlist"><i class="fas fa-heart"></i></button>
+                            <button class="action-btn" title="Compare"><i class="fas fa-exchange-alt"></i></button>
+                            <button class="action-btn" title="Quick View"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div class="w-full h-full bg-neutral-off-white flex items-center justify-center">
+                            <i class="fas fa-wine-bottle text-5xl text-secondary-brown"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-medium text-neutral-dark-gray mb-2 line-clamp-2">Organic Honey Set - 2 Pieces</h3>
+                            <div class="flex items-center gap-1 text-secondary-gold text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                <span class="text-neutral-gray ml-1">(17)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-lg font-bold text-primary-green">৳ 2,100</span>
+                            <button class="action-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- We Care Section -->
+    <section class="we-care-section">
+        <div class="container-ds text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">WE CARE</h2>
+            <p class="text-white/90 text-lg max-w-3xl mx-auto">Our mission is to provide the best quality products for your health and wellness.</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-primary-dark text-white pt-16 pb-8">
-        <div class="container-custom">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 border-b border-white/10 pb-12">
-                <!-- Brand -->
+    <footer class="bg-primary-dark-green text-white pt-12 pb-8">
+        <div class="container-ds">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 border-b border-white/10 pb-12">
+                <!-- Brand Column -->
                 <div class="space-y-4">
-                    <a href="#" class="font-display text-3xl font-bold text-white tracking-wider">NATURO</a>
-                    <p class="text-white/70 text-sm leading-relaxed">Providing high-quality, organic, and natural
-                        products for a healthier lifestyle. Certified and trusted by thousands.</p>
-                    <div class="flex gap-4">
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-light transition-colors"><i
-                                data-lucide="facebook" class="w-5 h-5"></i></a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-light transition-colors"><i
-                                data-lucide="instagram" class="w-5 h-5"></i></a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-light transition-colors"><i
-                                data-lucide="twitter" class="w-5 h-5"></i></a>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="text-3xl font-bold tracking-wider">NATURO BD</div>
+                        <i class="fas fa-leaf text-primary-light-green text-2xl"></i>
+                    </div>
+                    <p class="text-white/70 text-sm leading-relaxed">
+                        Providing high-quality, organic, and natural products for a healthier lifestyle. Certified and trusted by thousands.
+                    </p>
+                    <div class="space-y-2 text-sm text-white/70">
+                        <p><i class="fas fa-map-marker-alt mr-2 text-primary-light-green"></i> 123 Nature Street, Dhaka, Bangladesh</p>
+                        <p><i class="fas fa-phone mr-2 text-primary-light-green"></i> +880 1711-111111</p>
+                        <p><i class="fas fa-envelope mr-2 text-primary-light-green"></i> info@natrobd.com</p>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
+                <!-- Quick Links Column -->
                 <div>
                     <h4 class="font-bold text-lg mb-6">Quick Links</h4>
                     <ul class="space-y-3 text-sm text-white/70">
-                        <li><a href="#" class="hover:text-primary-light transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Shop All</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Blog</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">Terms & Conditions</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">Shipping Policy</a></li>
+                        <li><a href="#" class="hover:text-primary-light-green transition-colors">Blog</a></li>
                     </ul>
                 </div>
 
-                <!-- Categories -->
+                <!-- Follow Us Column -->
                 <div>
-                    <h4 class="font-bold text-lg mb-6">Categories</h4>
-                    <ul class="space-y-3 text-sm text-white/70">
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Organic Food</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Natural Skincare</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Essential Oils</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Supplements</a></li>
-                        <li><a href="#" class="hover:text-primary-light transition-colors">Eco Home</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                    <h4 class="font-bold text-lg mb-6">Contact Info</h4>
-                    <ul class="space-y-4 text-sm text-white/70">
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-primary-light shrink-0"></i>
-                            <span>123 Nature Blvd, Green City, <br>Eco State 90210</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i data-lucide="phone" class="w-5 h-5 text-primary-light shrink-0"></i>
-                            <span>+1 (555) 123-4567</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i data-lucide="mail" class="w-5 h-5 text-primary-light shrink-0"></i>
-                            <span>hello@naturo-nature.com</span>
-                        </li>
-                    </ul>
+                    <h4 class="font-bold text-lg mb-6">Follow Us</h4>
+                    <div class="flex gap-4 mb-6">
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-light-green transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-light-green transition-colors">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary-light-green transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
-                <p>&copy; 2024 Naturo Nature. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                </div>
+            <div class="text-center text-sm text-white/50">
+                <p>&copy; 2024 NATURO BD. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Vite entry point - this will load our CSS and JS -->
+    <!-- Vite entry point -->
     <script type="module" src="/src/main.js"></script>
+
+    <!-- Initialize Carousel Slider -->
+    <script>
+        $(document).ready(function () {
+            // Slider configuration
+            const sliderConfig = {
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: true,
+                prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+                nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            };
+
+            // Initialize Slick Carousel for each product slider section
+            $('.product-slider').each(function() {
+                // Check if it's the best sellers slider (first one)
+                if ($(this).closest('section').find('h2').text().includes('BEST SELLERS')) {
+                    $(this).slick(sliderConfig);
+                } else {
+                    $(this).slick(sliderConfig);
+                }
+            });
+
+            // Add to cart animation
+            $('.action-btn').on('click', function (e) {
+                if ($(this).find('.fa-shopping-cart').length) {
+                    e.preventDefault();
+                    const btn = $(this);
+                    const originalHtml = btn.html();
+                    
+                    btn.html('<i class="fas fa-check"></i>');
+                    btn.css('background', '#4CAF50');
+                    
+                    setTimeout(function () {
+                        btn.html(originalHtml);
+                        btn.css('background', '');
+                    }, 1500);
+                }
+            });
+
+            // Wishlist toggle
+            $('.action-btn').on('click', function (e) {
+                if ($(this).find('.fa-heart').length) {
+                    e.preventDefault();
+                    $(this).toggleClass('active');
+                    if ($(this).hasClass('active')) {
+                        $(this).css('background', '#DC3545');
+                        $(this).css('color', '#FFFFFF');
+                    } else {
+                        $(this).css('background', '');
+                        $(this).css('color', '');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
+
