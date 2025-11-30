@@ -185,8 +185,20 @@ header {
 
 /* We Care Section */
 .we-care-section {
-  background: var(--color-primary-light-green);
-  padding: 2rem 0;
+  background-color: #4ADE80; /* Fallback */
+  background: linear-gradient(to right, #4ADE80, #22C55E); /* Adjust to match the bright green in the image */
+  background: #34D399; /* A closer match to the reference image's flat green */
+  background-color: rgb(74, 222, 128); /* Tailwind green-400 approx */
+  /* The image shows a flat, bright green. Let's use a custom color or a tailwind one. */
+  background-color: #4cd176; /* Approximate from image */
+}
+
+.we-care-card img {
+    transition: transform 0.5s ease;
+}
+
+.we-care-card:hover img {
+    transform: scale(1.1);
 }
 
 /* Hero Slider Styles */
