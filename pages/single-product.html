@@ -28,6 +28,17 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/src/styles/main.css">
+    
+    <style>
+        /* Line clamp utility for product titles */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -113,169 +124,191 @@
     <!-- Main Content -->
     <main class="bg-[#F5F5F5]">
         <!-- Product Section -->
-        <section class="single-product-container py-8">
-            <div class="product-layout">
+        <section class="max-w-[1400px] mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 py-8">
                 <!-- Product Gallery -->
-                <div class="product-gallery-container">
-                    <div class="product-gallery-main">
-                        <img id="main-product-image" src="/public/images/products/honey-combo-main.jpg"
-                            alt="সিগনেচার হানি কম্বো">
-                    </div>
-                    <div class="product-gallery-thumbnails">
-                        <div class="product-thumbnail active" data-image="/public/images/products/honey-combo-1.jpg">
-                            <img src="/public/images/products/honey-combo-1.jpg" alt="Thumbnail 1">
+                <div class="sticky top-20 md:sticky relative md:top-20">
+                    <div class="flex flex-col gap-4">
+                        <div class="w-full aspect-square bg-white border border-[#F0F0F0] rounded-lg p-8 flex items-center justify-center">
+                            <img id="main-product-image" src="/public/images/products/honey-combo-main.jpg"
+                                alt="সিগনেচার হানি কম্বো" class="w-full h-full object-contain">
                         </div>
-                        <div class="product-thumbnail" data-image="/public/images/products/honey-combo-2.jpg">
-                            <img src="/public/images/products/honey-combo-2.jpg" alt="Thumbnail 2">
-                        </div>
-                        <div class="product-thumbnail" data-image="/public/images/products/honey-combo-3.jpg">
-                            <img src="/public/images/products/honey-combo-3.jpg" alt="Thumbnail 3">
-                        </div>
-                        <div class="product-thumbnail" data-image="/public/images/products/honey-combo-4.jpg">
-                            <img src="/public/images/products/honey-combo-4.jpg" alt="Thumbnail 4">
-                        </div>
-                        <div class="product-thumbnail" data-image="/public/images/products/honey-combo-5.jpg">
-                            <img src="/public/images/products/honey-combo-5.jpg" alt="Thumbnail 5">
+                        <div class="flex flex-row gap-3 justify-center flex-wrap md:justify-center justify-start overflow-x-auto pb-2">
+                            <div class="product-thumbnail min-w-[70px] md:w-20 w-[70px] h-[70px] md:h-20 border-[3px] border-[#FF6B35] rounded-md p-2 cursor-pointer transition-all duration-300 bg-white flex items-center justify-center flex-shrink-0" data-image="/public/images/products/honey-combo-1.jpg">
+                                <img src="/public/images/products/honey-combo-1.jpg" alt="Thumbnail 1" class="w-full h-full object-contain">
+                            </div>
+                            <div class="product-thumbnail min-w-[70px] md:w-20 w-[70px] h-[70px] md:h-20 border-2 border-[#E0E0E0] rounded-md p-2 cursor-pointer transition-all duration-300 bg-white flex items-center justify-center flex-shrink-0 hover:border-[#FF6B35]" data-image="/public/images/products/honey-combo-2.jpg">
+                                <img src="/public/images/products/honey-combo-2.jpg" alt="Thumbnail 2" class="w-full h-full object-contain">
+                            </div>
+                            <div class="product-thumbnail min-w-[70px] md:w-20 w-[70px] h-[70px] md:h-20 border-2 border-[#E0E0E0] rounded-md p-2 cursor-pointer transition-all duration-300 bg-white flex items-center justify-center flex-shrink-0 hover:border-[#FF6B35]" data-image="/public/images/products/honey-combo-3.jpg">
+                                <img src="/public/images/products/honey-combo-3.jpg" alt="Thumbnail 3" class="w-full h-full object-contain">
+                            </div>
+                            <div class="product-thumbnail min-w-[70px] md:w-20 w-[70px] h-[70px] md:h-20 border-2 border-[#E0E0E0] rounded-md p-2 cursor-pointer transition-all duration-300 bg-white flex items-center justify-center flex-shrink-0 hover:border-[#FF6B35]" data-image="/public/images/products/honey-combo-4.jpg">
+                                <img src="/public/images/products/honey-combo-4.jpg" alt="Thumbnail 4" class="w-full h-full object-contain">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Product Info -->
-                <div class="product-info-container">
-                    <h1 class="product-title">সিগনেচার হানি কম্বো | Signature Honey Combo</h1>
+                <div class="py-4">
+                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-4 leading-tight">সিগনেচার হানি কম্বো | Signature Honey Combo</h1>
 
-                    <div class="product-price-section">
-                        <span class="product-original-price">৳2,150</span>
-                        <span class="product-current-price">৳1,800</span>
-                        <span class="product-discount-badge">15% OFF</span>
+                    <div class="flex items-baseline gap-4 mb-6">
+                        <span class="text-xl font-normal text-[#999999] line-through">৳2,150</span>
+                        <span class="text-3xl md:text-4xl font-extrabold text-[#FF6B35]">৳1,800</span>
+                        <span class="inline-block px-3 py-1 bg-[#FF4444] text-white rounded text-sm font-bold">15% OFF</span>
                     </div>
 
-                    <div class="product-quantity-selector">
-                        <button class="quantity-button" id="decrease-quantity">-</button>
-                        <span class="quantity-display" id="quantity-display">1</span>
-                        <button class="quantity-button" id="increase-quantity">+</button>
-                    </div>
-
-                    <div class="product-actions">
-                        <button class="btn-add-to-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>কার্টে যোগ করুন</span>
-                        </button>
-                        <button class="btn-order-now">
-                            <span>অর্ডার করুন</span>
-                        </button>
-                        <div class="btn-call-order">
-                            <i class="fas fa-phone"></i>
-                            <span>কল অর্ডার: 09639812525</span>
+                    <!-- Weight/Variant Selection -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-[#333333] mb-3">বাছাই করুন:</label>
+                        <div class="flex gap-4 flex-wrap md:flex-row flex-col">
+                            <button class="variant-option relative px-6 py-3 border-2 border-[#E0E0E0] rounded-md bg-white text-[#333333] text-sm font-semibold cursor-pointer transition-all duration-300 flex items-center gap-2 md:w-auto w-full justify-between bg-[#00A651] text-white border-[#00A651]" data-variant="600g">
+                                <span>৬০০ গ্রাম</span>
+                                <span class="inline-block px-2 py-0.5 bg-[#FF4444] text-white rounded text-xs font-bold">32% OFF</span>
+                            </button>
+                            <button class="variant-option relative px-6 py-3 border-2 border-[#E0E0E0] rounded-md bg-white text-[#333333] text-sm font-semibold cursor-pointer transition-all duration-300 flex items-center gap-2 md:w-auto w-full justify-between hover:border-[#CCCCCC] hover:bg-[#F5F5F5]" data-variant="250g">
+                                <span>২৫০ গ্রাম</span>
+                                <span class="inline-block px-2 py-0.5 bg-[#FF4444] text-white rounded text-xs font-bold">17% OFF</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="product-category-tag">
-                        <span class="product-category-label">ক্যাটাগরি:</span>
-                        <a href="#" class="product-category-link">Combo</a>
+                    <div class="flex items-center gap-4 mb-6 py-4">
+                        <button class="w-10 h-10 border border-[#E0E0E0] rounded bg-white text-black text-xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-[#F5F5F5] hover:border-[#CCCCCC]" id="decrease-quantity">-</button>
+                        <span class="w-15 h-10 border border-[#E0E0E0] rounded bg-white text-center leading-10 text-base font-semibold" id="quantity-display">1</span>
+                        <button class="w-10 h-10 border border-[#E0E0E0] rounded bg-white text-black text-xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-[#F5F5F5] hover:border-[#CCCCCC]" id="increase-quantity">+</button>
+                    </div>
+
+                    <div class="flex flex-col gap-4 mb-6">
+                        <button class="btn-added w-full px-8 py-4 bg-[#00A651] text-white border-none rounded-md text-base font-bold cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:bg-[#008F45] hidden" id="btn-added">
+                            <i class="fas fa-check"></i>
+                            <span>Added</span>
+                        </button>
+                        <button class="w-full px-8 py-4 bg-[#E0E0E0] text-[#333333] border border-[#E0E0E0] rounded-md text-base font-semibold cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:bg-[#D0D0D0] hover:border-[#CCCCCC]" id="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>কার্টে যোগ করুন</span>
+                        </button>
+                        <button class="w-full px-8 py-4 bg-[#FF6B35] text-white border-none rounded-md text-base font-bold cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:bg-[#FF5520] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(255,107,53,0.3)]">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>অর্ডার করুন</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-sm font-semibold text-[#333333]">কল অর্ডার:</span>
+                        <div class="px-5 py-3 border border-black rounded bg-white">
+                            <span class="text-base font-semibold text-[#333333]">09639812525</span>
+                        </div>
+                    </div>
+
+                    <div class="inline-flex items-center gap-2 text-sm text-[#666666] mt-4 py-2">
+                        <span class="font-semibold text-black">ক্যাটাগরি:</span>
+                        <a href="#" class="text-[#2D5F3F] no-underline hover:underline">Combo</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Product Description Section -->
-        <section class="product-description-section">
-            <div class="single-product-container">
-                <h2 class="product-description-title">
+        <section class="bg-[#F9F9F9] py-12 mt-12">
+            <div class="max-w-[1400px] mx-auto px-4">
+                <h2 class="text-3xl font-bold text-black mb-8 flex items-center gap-2">
                     <span>🍯</span>
                     <span>সিগনেচার হানি কম্বো</span>
                 </h2>
-                <div class="product-description-content">
-                    <p class="product-description-paragraph">
+                <div class="bg-white p-8 rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+                    <p class="text-[0.95rem] leading-[1.8] text-[#333333] mb-4">
                         <strong>৪ ধরনের ফুল, ৪টি স্বাম, ৪টি গুণ—এক সাথে এক কম্বোতে!</strong>
                     </p>
 
-                    <h3 class="product-description-subheading">কম্বোতে যা থাকবে:</h3>
-                    <ul class="product-description-list">
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2">কম্বোতে যা থাকবে:</h3>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-4">
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>কালোজিরা ফুলের মধু- ৫০০ গ্রাম</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>সুন্দরবনের খলিশা ফুলের মধু- ৫০০ গ্রাম</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>সরিষা ফুলের মধু- ৫০০ গ্রাম</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>ধনিয়া-মিশ্র ফুলের মধু- ৫০০ গ্রাম</span>
                         </li>
                     </ul>
 
-                    <p class="product-description-paragraph">
+                    <p class="text-[0.95rem] leading-[1.8] text-[#333333] mb-4">
                         <strong>প্রাকৃতিকভাবে সংগ্রহকৃত বিশুদ্ধ যাঁচি মধু</strong><br>
                         আমাদের এই মধু সম্পূর্ণ প্রাকৃতিকভাবে সংগ্রহ করা হয়েছে। কোনো রাসায়নিক, প্রিজারভেটিভ বা কৃত্রিম
                         উপাদান নেই।
                         প্রতিটি বোতল ল্যাব টেস্ট করা হয়েছে এবং ১০০% বিশুদ্ধতা নিশ্চিত করা হয়েছে।
                     </p>
 
-                    <h3 class="product-description-subheading">মধুর উপকারিতা:</h3>
-                    <ul class="product-description-list">
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2">মধুর উপকারিতা:</h3>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-4">
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>রোগ প্রতিরোধ ক্ষমতা বৃদ্ধি</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>হজমে সহায়তা</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>গলা ব্যথা ও কাশিতে উপকারী</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>শক্তি ও প্রাণশক্তি বৃদ্ধি</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>পাকৃতিক অ্যান্টি-অক্সিডেন্টে ভরপুর</span>
                         </li>
                     </ul>
 
-                    <h3 class="product-description-subheading">কেন এই কম্বো?</h3>
-                    <ul class="product-description-list">
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2">কেন এই কম্বো?</h3>
+                    <ul class="list-none p-0 m-0 flex flex-col gap-4">
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>একসাথে ৪ ধরনের ফুলের ভিন্ন স্বাদের মধু</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>প্রাকৃতিকভাবে উৎপাদিত ও ল্যাব টেস্টেও</span>
                         </li>
-                        <li class="product-description-item">
-                            <i class="fas fa-check-circle product-description-icon"></i>
+                        <li class="text-[0.95rem] leading-[1.6] text-[#333333] flex items-start gap-3 py-2">
+                            <i class="fas fa-check-circle text-xl mt-0.5 flex-shrink-0 text-[#00A651]"></i>
                             <span>নিজে খাওয়ার জন্য বা উপহার দেওয়ার জন্য উপযুক্ত</span>
                         </li>
                     </ul>
 
-                    <h3 class="product-description-subheading"># শতভাগ প্রাকৃতিক:</h3>
-                    <p class="product-description-paragraph">
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2"># শতভাগ প্রাকৃতিক:</h3>
+                    <p class="text-[0.95rem] leading-[1.8] text-[#333333] mb-4">
                         আমাদের মধুতে কোনো রাসায়নিক, প্রিজারভেটিভ বা কৃত্রিম উপাদান নেই। সম্পূর্ণ প্রাকৃতিক এবং বিশুদ্ধ।
                     </p>
 
-                    <h3 class="product-description-subheading"># নির্ভরযোগ্য প্রক্রিয়াজাতকরণ:</h3>
-                    <p class="product-description-paragraph">
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2"># নির্ভরযোগ্য প্রক্রিয়াজাতকরণ:</h3>
+                    <p class="text-[0.95rem] leading-[1.8] text-[#333333] mb-4">
                         প্রতিটি বোতল ল্যাব টেস্ট করা হয়েছে এবং বিশুদ্ধতা নিশ্চিত করা হয়েছে। নিরাপদ এবং স্বাস্থ্যসম্মত
                         প্রক্রিয়াজাতকরণ।
                     </p>
 
-                    <h3 class="product-description-subheading"># প্রাকৃতিক পণ্যে অঙ্গীকারবদ্ধ:</h3>
-                    <p class="product-description-paragraph">
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2"># প্রাকৃতিক পণ্যে অঙ্গীকারবদ্ধ:</h3>
+                    <p class="text-[0.95rem] leading-[1.8] text-[#333333] mb-4">
                         NATURO "BACK TO NATURE" অঙ্গীকারের সাথে সম্পূর্ণ প্রাকৃতিক পণ্য সরবরাহ করে। আমরা প্রকৃতির
                         শক্তিতে বিশ্বাস করি।
                     </p>
 
-                    <h3 class="product-description-subheading"># গ্রাহক সন্তুষ্টি:</h3>
-                    <p class="product-description-paragraph">
+                    <h3 class="text-lg font-bold text-black mt-6 mb-4 flex items-center gap-2"># গ্রাহক সন্তুষ্টি:</h3>
+                    <p class="text-[0.95rem] leading-[1.8] text-[#333333] mb-4">
                         আমাদের হাজার হাজার সন্তুষ্ট গ্রাহক আমাদের পণ্যের গুণমান এবং সেবার সাক্ষী। আপনার সন্তুষ্টিই
                         আমাদের সাফল্য।
                     </p>
@@ -284,68 +317,68 @@
         </section>
 
         <!-- Related Products Section -->
-        <section class="related-products-section">
-            <div class="single-product-container">
-                <div class="section-header">
-                    <h2 class="section-title">Related Products</h2>
+        <section class="py-12 bg-white">
+            <div class="max-w-[1400px] mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-black">Related Products</h2>
                     <div class="flex items-center gap-4">
-                        <a href="#" class="section-category-link">
+                        <a href="#" class="text-sm text-[#2D5F3F] no-underline flex items-center gap-1 font-medium hover:underline">
                             <span>Combo</span>
                             <i class="fas fa-chevron-right text-xs"></i>
                         </a>
-                        <div class="section-navigation">
-                            <button class="section-nav-button related-prev">
+                        <div class="flex gap-2">
+                            <button class="w-9 h-9 border border-[#E0E0E0] rounded-full bg-white cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-[#FF6B35] hover:border-[#FF6B35] hover:text-white related-prev">
                                 <i class="fas fa-chevron-left"></i>
                             </button>
-                            <button class="section-nav-button related-next">
+                            <button class="w-9 h-9 border border-[#E0E0E0] rounded-full bg-white cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-[#FF6B35] hover:border-[#FF6B35] hover:text-white related-next">
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="products-grid related-products-slider">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 related-products-slider">
                     <!-- Product Card 1 -->
-                    <div class="related-product-card">
-                        <div class="related-product-image-container">
-                            <img src="/public/images/products/cardio-care-combo.jpg" alt="Cardio Care Combo">
+                    <div class="w-full bg-white border border-[#E0E0E0] rounded-lg p-4 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:border-[#FF6B35]">
+                        <div class="aspect-square bg-[#FAFAFA] rounded mb-4 flex items-center justify-center overflow-hidden relative">
+                            <img src="/public/images/products/cardio-care-combo.jpg" alt="Cardio Care Combo" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="related-product-title">Cardio Care Combo</h3>
-                        <div class="related-product-price-container">
-                            <span class="related-product-price">৳1,400</span>
-                            <span class="related-product-original-price">৳2,000</span>
+                        <h3 class="text-sm font-medium text-black mb-2 min-h-[2.8em] leading-snug line-clamp-2">Cardio Care Combo</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-lg font-bold text-[#FF6B35]">৳1,400</span>
+                            <span class="text-sm font-normal text-[#999999] line-through">৳2,000</span>
                         </div>
                     </div>
                     <!-- Product Card 2 -->
-                    <div class="related-product-card">
-                        <div class="related-product-image-container">
-                            <img src="/public/images/products/beej-honey-combo-1.jpg" alt="Beej Honey Combo">
+                    <div class="w-full bg-white border border-[#E0E0E0] rounded-lg p-4 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:border-[#FF6B35]">
+                        <div class="aspect-square bg-[#FAFAFA] rounded mb-4 flex items-center justify-center overflow-hidden relative">
+                            <img src="/public/images/products/beej-honey-combo-1.jpg" alt="Beej Honey Combo" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="related-product-title">Beej Honey Combo</h3>
-                        <div class="related-product-price-container">
-                            <span class="related-product-price">৳1,750</span>
-                            <span class="related-product-original-price">৳1,950</span>
+                        <h3 class="text-sm font-medium text-black mb-2 min-h-[2.8em] leading-snug line-clamp-2">Beej Honey Combo</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-lg font-bold text-[#FF6B35]">৳1,750</span>
+                            <span class="text-sm font-normal text-[#999999] line-through">৳1,950</span>
                         </div>
                     </div>
                     <!-- Product Card 3 -->
-                    <div class="related-product-card">
-                        <div class="related-product-image-container">
-                            <img src="/public/images/products/beej-honey-combo-2.jpg" alt="Beej Honey Combo">
+                    <div class="w-full bg-white border border-[#E0E0E0] rounded-lg p-4 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:border-[#FF6B35]">
+                        <div class="aspect-square bg-[#FAFAFA] rounded mb-4 flex items-center justify-center overflow-hidden relative">
+                            <img src="/public/images/products/beej-honey-combo-2.jpg" alt="Beej Honey Combo" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="related-product-title">Beej Honey Combo</h3>
-                        <div class="related-product-price-container">
-                            <span class="related-product-price">৳1,150</span>
-                            <span class="related-product-original-price">৳1,350</span>
+                        <h3 class="text-sm font-medium text-black mb-2 min-h-[2.8em] leading-snug line-clamp-2">Beej Honey Combo</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-lg font-bold text-[#FF6B35]">৳1,150</span>
+                            <span class="text-sm font-normal text-[#999999] line-through">৳1,350</span>
                         </div>
                     </div>
                     <!-- Product Card 4 -->
-                    <div class="related-product-card">
-                        <div class="related-product-image-container">
-                            <img src="/public/images/products/super-food-combo.jpg" alt="Super Food Combo">
+                    <div class="w-full bg-white border border-[#E0E0E0] rounded-lg p-4 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:border-[#FF6B35]">
+                        <div class="aspect-square bg-[#FAFAFA] rounded mb-4 flex items-center justify-center overflow-hidden relative">
+                            <img src="/public/images/products/super-food-combo.jpg" alt="Super Food Combo" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="related-product-title">Super Food Combo</h3>
-                        <div class="related-product-price-container">
-                            <span class="related-product-price">৳1,200</span>
-                            <span class="related-product-original-price">৳1,600</span>
+                        <h3 class="text-sm font-medium text-black mb-2 min-h-[2.8em] leading-snug line-clamp-2">Super Food Combo</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-lg font-bold text-[#FF6B35]">৳1,200</span>
+                            <span class="text-sm font-normal text-[#999999] line-through">৳1,600</span>
                         </div>
                     </div>
                 </div>
@@ -353,30 +386,30 @@
         </section>
 
         <!-- Recently Viewed Section -->
-        <section class="recently-viewed-section">
-            <div class="single-product-container">
-                <div class="section-header">
-                    <h2 class="section-title">Recently Viewed</h2>
-                    <div class="section-navigation">
-                        <button class="section-nav-button recently-prev">
+        <section class="py-12 bg-[#F9F9F9]">
+            <div class="max-w-[1400px] mx-auto px-4">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold text-black">Recently Viewed</h2>
+                    <div class="flex gap-2">
+                        <button class="w-9 h-9 border border-[#E0E0E0] rounded-full bg-white cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-[#FF6B35] hover:border-[#FF6B35] hover:text-white recently-prev">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="section-nav-button recently-next">
+                        <button class="w-9 h-9 border border-[#E0E0E0] rounded-full bg-white cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-[#FF6B35] hover:border-[#FF6B35] hover:text-white recently-next">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
-                <div class="products-grid recently-viewed-slider">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 recently-viewed-slider">
                     <!-- Product Card 1 -->
-                    <div class="related-product-card">
-                        <div class="related-product-image-container">
+                    <div class="w-full bg-white border border-[#E0E0E0] rounded-lg p-4 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.12)] hover:border-[#FF6B35]">
+                        <div class="aspect-square bg-[#FAFAFA] rounded mb-4 flex items-center justify-center overflow-hidden relative">
                             <img src="/public/images/products/black-seed-kholisha-honey.jpg"
-                                alt="Black Seed & Kholisha Honey">
+                                alt="Black Seed & Kholisha Honey" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="related-product-title">Black Seed & Kholisha Honey</h3>
-                        <div class="related-product-price-container">
-                            <span class="related-product-price">৳2,200</span>
-                            <span class="related-product-original-price">৳2,450</span>
+                        <h3 class="text-sm font-medium text-black mb-2 min-h-[2.8em] leading-snug line-clamp-2">Black Seed & Kholisha Honey</h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-lg font-bold text-[#FF6B35]">৳2,200</span>
+                            <span class="text-sm font-normal text-[#999999] line-through">৳2,450</span>
                         </div>
                     </div>
                 </div>
@@ -449,7 +482,7 @@
     </footer>
 
     <!-- Floating Call Button -->
-    <a href="tel:09639812525" class="floating-call-button" aria-label="Call Now">
+    <a href="tel:09639812525" class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#FF4444] text-white flex items-center justify-center shadow-[0_4px_12px_rgba(255,68,68,0.4)] cursor-pointer z-[999] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_16px_rgba(255,68,68,0.5)]" aria-label="Call Now">
         <i class="fas fa-phone text-xl"></i>
     </a>
 
@@ -480,12 +513,41 @@
         thumbnails.forEach(thumbnail => {
             thumbnail.addEventListener('click', () => {
                 // Remove active class from all thumbnails
-                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnails.forEach(t => {
+                    t.classList.remove('border-[3px]', 'border-[#FF6B35]');
+                    t.classList.add('border-2', 'border-[#E0E0E0]');
+                });
                 // Add active class to clicked thumbnail
-                thumbnail.classList.add('active');
+                thumbnail.classList.remove('border-2', 'border-[#E0E0E0]');
+                thumbnail.classList.add('border-[3px]', 'border-[#FF6B35]');
                 // Update main image
                 const imageSrc = thumbnail.getAttribute('data-image');
                 mainImage.src = imageSrc;
+            });
+        });
+
+        // Add to Cart Button Toggle
+        const addToCartBtn = document.getElementById('btn-add-to-cart');
+        const addedBtn = document.getElementById('btn-added');
+
+        addToCartBtn.addEventListener('click', () => {
+            addToCartBtn.classList.add('hidden');
+            addedBtn.classList.remove('hidden');
+            addedBtn.classList.add('flex');
+            // You can add cart functionality here
+        });
+
+        // Variant Selection
+        const variantOptions = document.querySelectorAll('.variant-option');
+        variantOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                variantOptions.forEach(opt => {
+                    opt.classList.remove('bg-[#00A651]', 'text-white', 'border-[#00A651]');
+                    opt.classList.add('bg-white', 'text-[#333333]', 'border-[#E0E0E0]');
+                });
+                option.classList.remove('bg-white', 'text-[#333333]', 'border-[#E0E0E0]');
+                option.classList.add('bg-[#00A651]', 'text-white', 'border-[#00A651]');
+                // You can update price based on variant here
             });
         });
 
